@@ -1,0 +1,7 @@
+---
+- name: Prepare ArchLinux Distributions
+  hosts: archlinux
+  gather_facts: false
+  tasks:
+    - name: Ensure depencencies are installed
+      raw: pacman -Sy --noconfirm python grep mkinitcpio

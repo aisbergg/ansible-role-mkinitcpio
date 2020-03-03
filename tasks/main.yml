@@ -1,0 +1,34 @@
+---
+- name: Create mkinitcpio config
+  tags: mkinitcpio
+  template:
+    src: mkinitcpio.conf.j2
+    dest: /etc/mkinitcpio.conf
+    owner: root
+    group: root
+    mode: 0644
+    lstrip_blocks: true
+    validate: bash -n %s
+  notify: create initial ramdisk
+  vars:
+    _mkinitcpio_config: "{{ mkinitcpio_config_defaults | combine(mkinitcpio_config) }}"
+
+- name: Find preset files
+  find:
+    paths: /etc/mkinitcpio.d/
+    patterns: "*.preset"
+  register: preset_files
+
+- include_tasks: preset.yml
+  vars:
+    path: "{{ item.path }}"
+  loop_control:
+    label: "{{ item.path }}"
+  when: mkinitcpio_disable_fallback_preset
+  loop: "{{ preset_files.files | default([]) }}"
+
+- name: Force creation of initial ramdisk
+  tags: mkinitcpio
+  command: /bin/true
+  notify: create initial ramdisk
+  when: mkinitcpio_force_create

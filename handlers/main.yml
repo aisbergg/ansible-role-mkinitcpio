@@ -1,0 +1,7 @@
+---
+- name: create initial ramdisk
+  command: /usr/bin/mkinitcpio -P
+  register: mkinitcpio_result
+  failed_when: mkinitcpio_result.rc != 0
+  changed_when: false
+  when: ansible_virtualization_type != "docker"

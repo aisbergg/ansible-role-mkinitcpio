@@ -1,0 +1,28 @@
+---
+dependency:
+  name: galaxy
+driver:
+  name: docker
+lint:
+  name: yamllint
+  options:
+    config-file: molecule/default/yaml-lint.yml
+platforms:
+  - name: archlinux
+    image: archlinux
+    pre_build_image: true
+provisioner:
+  name: ansible
+  playbooks:
+    prepare: ${MOLECULE_PLAYBOOK:-prepare.yml}
+    converge: ${MOLECULE_PLAYBOOK:-playbook.yml}
+  lint:
+    name: ansible-lint
+verifier:
+  name: testinfra
+  env:
+    LANG: ""
+  lint:
+    name: flake8
+  options:
+    s: true
