@@ -1,5 +1,5 @@
 ---
-mkinitcpio_config_defaults:
+__mkinitcpio_config_defaults:
   MODULES: []
   BINARIES: []
   FILES: []

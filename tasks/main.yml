@@ -11,7 +11,7 @@
     validate: bash -n %s
   notify: create initial ramdisk
   vars:
-    cfg: "{{ mkinitcpio_config_defaults | combine(mkinitcpio_config) }}"
+    cfg: "{{ __mkinitcpio_config_defaults | combine(mkinitcpio_config) }}"
 
 - name: Find preset files
   find:
