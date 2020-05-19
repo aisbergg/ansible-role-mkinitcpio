@@ -1,5 +1,5 @@
 ---
-- name: "Disable fallback preset for '{{ path | basename | replace('.preset', '') }}''"
+- name: "Disable fallback preset for '{{ path | basename | replace('.preset', '') }}'"
   lineinfile:
     path: "{{ path }}"
     regexp: "^PRESETS="
