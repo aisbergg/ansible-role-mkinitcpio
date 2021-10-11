@@ -3,5 +3,6 @@
   hosts: archlinux
   gather_facts: false
   tasks:
-    - name: Ensure depencencies are installed
-      raw: pacman -Sy --noconfirm python grep mkinitcpio
+    - name: ensure depencencies are installed
+      ansible.builtin.raw: pacman -Sy --noconfirm python grep mkinitcpio
+      changed_when: false

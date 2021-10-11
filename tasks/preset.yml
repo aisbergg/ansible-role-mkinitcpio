@@ -1,6 +1,6 @@
 ---
-- name: "Disable fallback preset for '{{ path | basename | replace('.preset', '') }}'"
-  lineinfile:
+- name: disable fallback preset for '{{ path | basename | replace('.preset', '') }}'
+  ansible.builtin.lineinfile:
     path: "{{ path }}"
     regexp: "^PRESETS="
     line: "PRESETS=(\"default\")"

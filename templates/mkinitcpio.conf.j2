@@ -2,9 +2,9 @@
 
 {% macro format_value(value) %}
   {%- if value is string %}
-{{ '"' ~ value ~ '"' }}
+{{ value | quote }}
   {%- elif value is sequence %}
-({% for v in value %}{{ '"' ~ v ~ '"' }}{{ ' ' if not loop.last else '' }}{% endfor %})
+({{ value | map('quote') | join(' ') }})
   {%- else %}
 {{ value }}
   {%- endif %}
