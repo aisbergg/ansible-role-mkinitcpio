@@ -22,7 +22,7 @@ None.
 
 ```yaml
 - hosts: all
-  vars: 
+  vars:
     mkinitcpio_config:
       MODULES:
         - btrfs
